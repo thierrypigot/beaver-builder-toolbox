@@ -85,6 +85,11 @@
             $(this).removeClass('error');
         }
 
+        if( name == 'meta_title' )
+        {
+            document.title = $(this).val();
+        }
+
         //console.log(nb);
     });
 
