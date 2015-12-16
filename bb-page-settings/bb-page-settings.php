@@ -2,8 +2,8 @@
 class BB_Page_Settings {
 
     function __construct(){
-        add_action( 'wp_enqueue_scripts',                   array( $this, 'enqueue_scripts' ) );
-        add_action( 'wp_footer',                            array( $this, 'print_footer' ) );
+        add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
+        add_action('wp_footer', array($this, 'print_footer'));
         add_action( 'wp_ajax_bb_pageSettings_update_post',      array( $this, 'ajax_handle_update_post' ) );
         add_action( 'wp_ajax_bb_pageSettings_update_postmeta',  array( $this, 'ajax_handle_update_postmeta' ) );
     }
@@ -30,107 +30,111 @@ class BB_Page_Settings {
     function print_footer(){
         global $post;
 
-        $detect_seo = false;
-
-        if( $this->detect_plugin( $this->detect_seo_plugins() ) )
+        if (class_exists( 'FLBuilderModel' ) && FLBuilderModel::is_builder_active())
         {
-            $detect_seo = true;
 
-            if( $this->detect_plugin( array( 'classes' => array('All_in_One_SEO_Pack','All_in_One_SEO_Pack_p') ) ) )
+            $detect_seo = false;
+
+            if( $this->detect_plugin( $this->detect_seo_plugins() ) )
             {
-                // All in one SEO : aiosp_title + aiosp_description
-                $meta_title_field       = '_aioseop_title';
-                $meta_description_field = '_aioseop_description';
-            }
-            else if( $this->detect_plugin( array( 'classes' => array('wpSEO'), 'constants' => array( 'WPSEO_VERSION' ) ) ) )
-            {
-                //  WordPress SEO
-                $meta_title_field       = '_yoast_wpseo_title';
-                $meta_description_field = '_yoast_wpseo_metadesc';
-            }
-            else if( $this->detect_plugin( array( 'classes' => array('HeadSpace_Plugin') ) ) )
-            {
-                //  HeadSpace2 SEO
-                $meta_title_field       = '_headspace_page_title';
-                $meta_description_field = '_headspace_description';
-            }
-            else if( $this->detect_plugin( array( 'classes' => array('Platinum_SEO_Pack') ) ) )
-            {
-                //  Platinum SEO Pack
-                $meta_title_field       = 'title';
-                $meta_description_field = 'description';
-            }
-            else if( $this->detect_plugin( array( 'classes' => array('Genesis_Admin_SEO_Settings') ) ) )
-            {
-                //  Genesis
-                $meta_title_field       = '_genesis_title';
-                $meta_description_field = '_genesis_description';
+                $detect_seo = true;
+
+                if( $this->detect_plugin( array( 'classes' => array('All_in_One_SEO_Pack','All_in_One_SEO_Pack_p') ) ) )
+                {
+                    // All in one SEO : aiosp_title + aiosp_description
+                    $meta_title_field       = '_aioseop_title';
+                    $meta_description_field = '_aioseop_description';
+                }
+                else if( $this->detect_plugin( array( 'classes' => array('wpSEO'), 'constants' => array( 'WPSEO_VERSION' ) ) ) )
+                {
+                    //  WordPress SEO
+                    $meta_title_field       = '_yoast_wpseo_title';
+                    $meta_description_field = '_yoast_wpseo_metadesc';
+                }
+                else if( $this->detect_plugin( array( 'classes' => array('HeadSpace_Plugin') ) ) )
+                {
+                    //  HeadSpace2 SEO
+                    $meta_title_field       = '_headspace_page_title';
+                    $meta_description_field = '_headspace_description';
+                }
+                else if( $this->detect_plugin( array( 'classes' => array('Platinum_SEO_Pack') ) ) )
+                {
+                    //  Platinum SEO Pack
+                    $meta_title_field       = 'title';
+                    $meta_description_field = 'description';
+                }
+                else if( $this->detect_plugin( array( 'classes' => array('Genesis_Admin_SEO_Settings') ) ) )
+                {
+                    //  Genesis
+                    $meta_title_field       = '_genesis_title';
+                    $meta_description_field = '_genesis_description';
+                }
+
+                $meta_title         = get_post_meta( $post->ID, $meta_title_field, true );
+                $meta_description   = get_post_meta( $post->ID, $meta_description_field, true );
             }
 
-            $meta_title         = get_post_meta( $post->ID, $meta_title_field, true );
-            $meta_description   = get_post_meta( $post->ID, $meta_description_field, true );
-        }
-
-        ?>
-        <div class="fl-pageSettings-panel">
-            <div class="fl-pageSettings-tabs">
-                <i class="fl-builder-pageSettings-close fa fa-times"></i>
-                <a data-tab="current-page" class="fl-active"><?php _e('Page Details', 'bb-toolbox'); ?></a>
-                <a data-tab="seo"><?php _e('SEO', 'bb-toolbox'); ?></a>
-            </div>
-            <div class="fl-pageSettings-panel-content">
-                <form action="">
-                    <div data-tab="current-page" class="active" action="">
-                        <div class="cell">
-                            <div class="field">
-                                <div class="input-wrap">
-                                    <input name="post_title" value="<?php echo esc_attr( $post->post_title ); ?>">
-                                </div>
-                                <label><?php _e('Title', 'bb-toolbox'); ?></label>
-                                <span class="indicator"><?php _e('Saving...', 'bb-toolbox'); ?></span>
-                            </div>
-                            <div class="field">
-                                <div class="input-wrap">
-                                    <span class="input-prefix"><?php echo home_url(); ?>/</span><input name="post_name" class="inline-input" value="<?php echo esc_attr( $post->post_name ); ?>">
-                                </div>
-                                <label><?php _e('Permalink', 'bb-toolbox'); ?></label>
-                                <span class="indicator"><?php _e('Saving...', 'bb-toolbox'); ?></span>
-                            </div>
-                        </div>
-                        <?php /*
-                        <div class="panel-footer">
-                            <input type="submit" value="submit">
-                        </div>
-                        */ ?>
-                    </div>
-
-                    <div data-tab="seo" action="">
-                        <div class="cell">
-                            <?php if( true === $detect_seo ): ?>
+            ?>
+            <div class="fl-pageSettings-panel">
+                <div class="fl-pageSettings-tabs">
+                    <i class="fl-builder-pageSettings-close fa fa-times"></i>
+                    <a data-tab="current-page" class="fl-active"><?php _e('Page Details', 'bb-toolbox'); ?></a>
+                    <a data-tab="seo"><?php _e('SEO', 'bb-toolbox'); ?></a>
+                </div>
+                <div class="fl-pageSettings-panel-content">
+                    <form action="">
+                        <div data-tab="current-page" class="active" action="">
+                            <div class="cell">
                                 <div class="field">
                                     <div class="input-wrap">
-                                        <input name="meta_title" value="<?php echo esc_attr( $meta_title ); ?>" class="count" data-field="<?php echo esc_attr( $meta_title_field ); ?>">
+                                        <input name="post_title" value="<?php echo esc_attr( $post->post_title ); ?>">
                                     </div>
-                                    <label><?php _e('Meta title', 'bb-toolbox'); ?> (<span><?php echo esc_html( strlen( $meta_title ) ); ?></span>/60)</label>
+                                    <label><?php _e('Title', 'bb-toolbox'); ?></label>
                                     <span class="indicator"><?php _e('Saving...', 'bb-toolbox'); ?></span>
                                 </div>
                                 <div class="field">
                                     <div class="input-wrap">
-                                        <input name="meta_description" value="<?php echo esc_html( $meta_description ); ?>" class="count" data-field="<?php echo esc_attr( $meta_description_field ); ?>">
+                                        <span class="input-prefix"><?php echo home_url(); ?>/</span><input name="post_name" class="inline-input" value="<?php echo esc_attr( $post->post_name ); ?>">
                                     </div>
-                                    <label><?php _e('Meta description', 'bb-toolbox'); ?> (<span><?php echo esc_html( strlen( $meta_description ) ); ?></span>/160)</label>
+                                    <label><?php _e('Permalink', 'bb-toolbox'); ?></label>
                                     <span class="indicator"><?php _e('Saving...', 'bb-toolbox'); ?></span>
                                 </div>
-                            <?php else: ?>
-                                <p><?php _e('No SEO plugin detected :(', 'bb-toolbox'); ?></p>
-                            <?php endif; ?>
+                            </div>
+                            <?php /*
+                            <div class="panel-footer">
+                                <input type="submit" value="submit">
+                            </div>
+                            */ ?>
                         </div>
-                    </div>
+
+                        <div data-tab="seo" action="">
+                            <div class="cell">
+                                <?php if( true === $detect_seo ): ?>
+                                    <div class="field">
+                                        <div class="input-wrap">
+                                            <input name="meta_title" value="<?php echo esc_attr( $meta_title ); ?>" class="count" data-field="<?php echo esc_attr( $meta_title_field ); ?>">
+                                        </div>
+                                        <label><?php _e('Meta title', 'bb-toolbox'); ?> (<span><?php echo esc_html( strlen( $meta_title ) ); ?></span>/60)</label>
+                                        <span class="indicator"><?php _e('Saving...', 'bb-toolbox'); ?></span>
+                                    </div>
+                                    <div class="field">
+                                        <div class="input-wrap">
+                                            <input name="meta_description" value="<?php echo esc_html( $meta_description ); ?>" class="count" data-field="<?php echo esc_attr( $meta_description_field ); ?>">
+                                        </div>
+                                        <label><?php _e('Meta description', 'bb-toolbox'); ?> (<span><?php echo esc_html( strlen( $meta_description ) ); ?></span>/160)</label>
+                                        <span class="indicator"><?php _e('Saving...', 'bb-toolbox'); ?></span>
+                                    </div>
+                                <?php else: ?>
+                                    <p><?php _e('No SEO plugin detected :(', 'bb-toolbox'); ?></p>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </form>
+
                 </form>
-
             </form>
-        </form>
-        <?php
+            <?php
+        }
     }
 
     function ajax_handle_update_post(){
