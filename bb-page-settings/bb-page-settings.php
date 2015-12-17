@@ -13,8 +13,8 @@ class BB_Page_Settings {
         global $post;
 
         if (class_exists( 'FLBuilderModel' ) && FLBuilderModel::is_builder_active()) {
-            wp_enqueue_script( 'bb-page-settings',   plugins_url( '/bb-page-settings/js/bb-page-settings.js', dirname(__FILE__) ), false, false, true );
-            wp_enqueue_style( 'bb-page-settings',    plugins_url( '/bb-page-settings/css/bb-page-settings.css', dirname(__FILE__) ) );
+            wp_enqueue_script( 'bb-page-settings',  plugins_url( '/bb-page-settings/js/bb-page-settings.js', dirname(__FILE__) ), false, false, true );
+            wp_enqueue_style( 'bb-page-settings',   plugins_url( '/bb-page-settings/css/bb-page-settings.css', dirname(__FILE__) ) );
 
             $data = array(
                 'button_text'   => __('Page settings', 'bb-toolbox'),
@@ -29,6 +29,10 @@ class BB_Page_Settings {
 
     function print_footer(){
         global $post;
+
+        require_once( ABSPATH . 'wp-admin/includes/template.php' );
+        require_once( ABSPATH . 'wp-admin/includes/theme.php' );
+
 
         if (class_exists( 'FLBuilderModel' ) && FLBuilderModel::is_builder_active())
         {
@@ -99,12 +103,72 @@ class BB_Page_Settings {
                                     <label><?php _e('Permalink', 'bb-toolbox'); ?></label>
                                     <span class="indicator"><?php _e('Saving...', 'bb-toolbox'); ?></span>
                                 </div>
+
+                                <?php
+                                $post_type_object = get_post_type_object($post->post_type);
+                                if ( $post_type_object->hierarchical ):
+                                    $dropdown_args = array(
+                                        'post_type'        => $post->post_type,
+                                        'exclude_tree'     => $post->ID,
+                                        'selected'         => $post->post_parent,
+                                        'name'             => 'post_parent',
+                                        'show_option_none' => __('(no parent)'),
+                                        'sort_column'      => 'menu_order, post_title',
+                                        'echo'             => 0,
+                                        'class'            => 'parent_id'
+                                    );
+
+                                    $dropdown_args = apply_filters( 'page_attributes_dropdown_pages_args', $dropdown_args, $post );
+                                    $pages = wp_dropdown_pages( $dropdown_args );
+                                    if ( ! empty($pages) ):
+                                        ?>
+                                        <div class="field">
+                                            <div class="input-wrap">
+                                                <?php echo $pages; ?>
+                                            </div>
+                                            <label><?php _e( 'Parent' ); ?></label>
+                                            <span class="indicator"><?php _e('Saving...', 'bb-toolbox'); ?></span>
+                                        </div>
+                                    <?php endif; // end empty pages check ?>
+                                <?php endif; // end hierarchical check. ?>
+
+                                <?php
+                                if ( 'page' == $post->post_type && 0 != count( get_page_templates( $post ) ) && get_option( 'page_for_posts' ) != $post->ID ):
+                                    $template = !empty($post->page_template) ? $post->page_template : false;
+
+                                    ?>
+                                    <div class="field">
+                                        <div class="input-wrap">
+                                            <select name="page_template" data-field="_wp_page_template">
+                                                <?php
+                                                /** This filter is documented in wp-admin/includes/meta-boxes.php */
+                                                $default_title = apply_filters( 'default_page_template_title',  __( 'Default Template' ), 'quick-edit' );
+                                                ?>
+                                                <option value="default"><?php echo esc_html( $default_title ); ?></option>
+                                                <?php page_template_dropdown( $template ) ?>
+                                            </select>
+                                        </div>
+                                        <label><?php _e( 'Template' ); ?></label>
+                                        <span class="indicator"><?php _e('Saving...', 'bb-toolbox'); ?></span>
+                                    </div>
+                                    <?php
+                                endif;
+                                ?>
+                                <?php /* ?>
+                                <div class="field">
+                                    <div class="input-wrap">
+                                        <?php
+                                        $post_type_object = get_post_type_object($post->post_type);
+                                        $thumbnail_id = get_post_meta( $post->ID, '_thumbnail_id', true );
+                                        echo _wp_post_thumbnail_html( $thumbnail_id, $post->ID );
+                                        ?>
+                                    </div>
+                                    <label><?php echo esc_html( $post_type_object->labels->featured_image ) ?></label>
+                                    <span class="indicator"><?php _e('Saving...', 'bb-toolbox'); ?></span>
+                                </div>
+                                <?php */ ?>
+
                             </div>
-                            <?php /*
-                            <div class="panel-footer">
-                                <input type="submit" value="submit">
-                            </div>
-                            */ ?>
                         </div>
 
                         <div data-tab="seo" action="">

@@ -47,7 +47,6 @@
 
         console.log(val);
         console.log(name);
-        console.log(url);
 
         $.post(
             BB_Settings.ajaxurl,
@@ -62,12 +61,102 @@
 
         if( name == 'post_name' )
         {
+            FLBuilder.showAjaxLoader();
+
             setTimeout(function () {
                 window.location.replace( url )
             }, 2000);
 
         }
     });
+
+
+
+    $('select[name=post_parent]').on('change', function() {
+        BB_Settings.last_indicator = $(this).closest('.field').find('.indicator');
+        BB_Settings.last_indicator.css('display', 'inline-block');
+
+        var val     = $(this).val();
+        var name    = $(this).attr('name');
+        var url     = BB_Settings.homeurl + "?p=" + BB_Settings.post_id + "&fl_builder";
+
+        console.log(val);
+        console.log(name);
+
+        $.post(
+            BB_Settings.ajaxurl,
+            {
+                action:             "bb_pageSettings_update_post",
+                update_post:        BB_Settings.post_id,
+                update_name:        name,
+                update_value:       val
+            },
+            on_update_success
+        );
+
+        FLBuilder.showAjaxLoader();
+
+        setTimeout(function () {
+            window.location.replace( url )
+        }, 2000);
+
+    });
+
+
+    $('select[name=page_template]').on('change', function() {
+        BB_Settings.last_indicator = $(this).closest('.field').find('.indicator');
+        BB_Settings.last_indicator.css('display', 'inline-block');
+
+        var val     = $(this).val();
+        var field   = $(this).attr('data-field');
+        var url     = BB_Settings.homeurl + "?p=" + BB_Settings.post_id + "&fl_builder";
+
+        console.log(val);
+        console.log(field);
+
+        $.post(
+            BB_Settings.ajaxurl,
+            {
+                action:             "bb_pageSettings_update_postmeta",
+                update_post:        BB_Settings.post_id,
+                update_field:       field,
+                update_value:       val
+            },
+            on_update_success
+        );
+
+        FLBuilder.showAjaxLoader();
+
+        setTimeout(function () {
+            window.location.replace( url )
+        }, 2000);
+
+    });
+
+
+
+    $('input[name=meta_title], input[name=meta_description]').on('change', function() {
+        BB_Settings.last_indicator = $(this).closest('.field').find('.indicator');
+        BB_Settings.last_indicator.css('display', 'inline-block');
+
+        var val     = $(this).val();
+        var field   = $(this).attr('data-field');
+
+        console.log(val);
+        console.log(field);
+
+        $.post(
+            BB_Settings.ajaxurl,
+            {
+                action:             "bb_pageSettings_update_postmeta",
+                update_post:        BB_Settings.post_id,
+                update_field:       field,
+                update_value:       val
+            },
+            on_update_success
+        );
+    });
+
 
     $('.count').keyup(function(){
         var nb = $(this).val().length;
@@ -93,32 +182,6 @@
         //console.log(nb);
     });
 
-    $('input[name=meta_title], input[name=meta_description]').on('change', function() {
-        BB_Settings.last_indicator = $(this).closest('.field').find('.indicator');
-        BB_Settings.last_indicator.css('display', 'inline-block');
-
-        var nb      = $(this).length;
-
-        var val     = $(this).val();
-        var name    = $(this).attr('name');
-        var field   = $(this).attr('data-field');
-
-        console.log(nb);
-        console.log(val);
-        console.log(name);
-        console.log(field);
-
-        $.post(
-            BB_Settings.ajaxurl,
-            {
-                action:             "bb_pageSettings_update_postmeta",
-                update_post:        BB_Settings.post_id,
-                update_value:       val,
-                update_field:       field
-            },
-            on_update_success
-        );
-    });
 
     function on_update_success(data) {
         BB_Settings.last_indicator.text( BB_Settings.saved_text ).delay(1000).fadeOut();

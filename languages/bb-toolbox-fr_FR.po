@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Beaver Builde Google Maps Module\n"
-"POT-Creation-Date: 2015-12-16 22:11+0100\n"
-"PO-Revision-Date: 2015-12-16 22:12+0100\n"
+"POT-Creation-Date: 2015-12-17 11:12+0100\n"
+"PO-Revision-Date: 2015-12-17 11:13+0100\n"
 "Last-Translator: Thierry Pigot <contact@thierry-pigot.fr>\n"
 "Language-Team: Thierry Pigot <contact@thierry-pigot.fr>\n"
 "Language: fr_FR\n"
@@ -21,48 +21,66 @@ msgid "Page settings"
 msgstr "Attributs de la page"
 
 #: bb-page-settings/bb-page-settings.php:21
-#: bb-page-settings/bb-page-settings.php:150
-#: bb-page-settings/bb-page-settings.php:174
+#: bb-page-settings/bb-page-settings.php:219
+#: bb-page-settings/bb-page-settings.php:237
 msgid "Saved!"
 msgstr "Enregistré !"
 
-#: bb-page-settings/bb-page-settings.php:77
+#: bb-page-settings/bb-page-settings.php:85
 msgid "Page Details"
 msgstr "Détails de la page"
 
-#: bb-page-settings/bb-page-settings.php:78
+#: bb-page-settings/bb-page-settings.php:86
 msgid "SEO"
 msgstr "SEO"
 
-#: bb-page-settings/bb-page-settings.php:88
+#: bb-page-settings/bb-page-settings.php:96
 msgid "Title"
 msgstr "Titre"
 
-#: bb-page-settings/bb-page-settings.php:89
-#: bb-page-settings/bb-page-settings.php:96
-#: bb-page-settings/bb-page-settings.php:114
-#: bb-page-settings/bb-page-settings.php:121
+#: bb-page-settings/bb-page-settings.php:97
+#: bb-page-settings/bb-page-settings.php:104
+#: bb-page-settings/bb-page-settings.php:130
+#: bb-page-settings/bb-page-settings.php:152
+#: bb-page-settings/bb-page-settings.php:182
+#: bb-page-settings/bb-page-settings.php:189
 msgid "Saving..."
 msgstr "Enregistrement"
 
-#: bb-page-settings/bb-page-settings.php:95
+#: bb-page-settings/bb-page-settings.php:103
 msgid "Permalink"
 msgstr "Permalien"
 
-#: bb-page-settings/bb-page-settings.php:113
+#: bb-page-settings/bb-page-settings.php:115
+msgid "(no parent)"
+msgstr "(Aucun parent)"
+
+#: bb-page-settings/bb-page-settings.php:129
+msgid "Parent"
+msgstr "Parent"
+
+#: bb-page-settings/bb-page-settings.php:145
+msgid "Default Template"
+msgstr "Modèle par défaut"
+
+#: bb-page-settings/bb-page-settings.php:151
+msgid "Template"
+msgstr "Modèle"
+
+#: bb-page-settings/bb-page-settings.php:181
 msgid "Meta title"
 msgstr "Méta titre"
 
-#: bb-page-settings/bb-page-settings.php:120
+#: bb-page-settings/bb-page-settings.php:188
 msgid "Meta description"
 msgstr "Méta description"
 
-#: bb-page-settings/bb-page-settings.php:124
+#: bb-page-settings/bb-page-settings.php:192
 msgid "No SEO plugin detected :("
 msgstr "Pas de plugin SEO détecté :("
 
-#: bb-page-settings/bb-page-settings.php:152
-#: bb-page-settings/bb-page-settings.php:176
+#: bb-page-settings/bb-page-settings.php:221
+#: bb-page-settings/bb-page-settings.php:239
 msgid "Nope"
 msgstr "Rien"
 
