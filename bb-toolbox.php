@@ -3,7 +3,7 @@
  * Plugin Name: Beaver Builder - Toolbox
  * Plugin URI: http://www.thierry-pigot.fr
  * Description: Add cool things to Beaver Builder.
- * Version: 1.0
+ * Version: 1.1
  * Author: Thierry Pigot
  * Author URI: http://www.thierry-pigot.fr
  */

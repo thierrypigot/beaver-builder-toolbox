@@ -63,7 +63,7 @@ class BB_Page_Settings {
                     $meta_title_field       = 'title';
                     $meta_description_field = 'description';
                 }
-                else if( $this->detect_plugin( array( 'classes' => array('Genesis_Admin_SEO_Settings') ) ) )
+                else if( $this->detect_plugin( array( 'functions' => array('genesis_constants') ) ) )
                 {
                     //  Genesis
                     $meta_title_field       = '_genesis_title';
@@ -253,14 +253,17 @@ class BB_Page_Settings {
                         'HeadSpace_Plugin',
                         'Platinum_SEO_Pack',
                         'wpSEO',
-                        'Genesis_Admin_SEO_Settings',
                     ),
 
                     // Functions to detect.
-                    'functions' => array(),
+                    'functions' => array(
+                        'genesis_constants'
+                    ),
 
                     // Constants to detect.
-                    'constants' => array( 'WPSEO_VERSION', ),
+                    'constants' => array(
+                        'WPSEO_VERSION',
+                    ),
                 )
             )
         );
