@@ -30,4 +30,7 @@ Settings
 == Changelog ==
 
 = 1.1 =
+* Add parent page and template page selector
+
+= 1.0 =
 * First stable version
