@@ -37,13 +37,13 @@
         $('.fl-pageSettings-panel-content [data-tab="' + tab + '"]').addClass('active');
     });
 
-    $('input[name=post_title], input[name=post_name]').on('change', function() {
+    /** Change Title **/
+    $('input[name=post_title]').on('change', function() {
         BB_Settings.last_indicator = $(this).closest('.field').find('.indicator');
-        BB_Settings.last_indicator.css('display', 'inline-block');
+        BB_Settings.last_indicator.addClass('label label-primary').css('display', 'inline-block');
 
         var val     = $(this).val();
         var name    = $(this).attr('name');
-        var url     = BB_Settings.homeurl + "?p=" + BB_Settings.post_id + "&fl_builder";
 
         console.log(val);
         console.log(name);
@@ -59,15 +59,42 @@
             on_update_success
         );
 
-        if( name == 'post_name' )
-        {
+    });
+
+    /** Change Permalink **/
+    $('input[name=post_name]').on('change', function() {
+
+        if(confirm( BB_Settings.permalink_text )) {
+            BB_Settings.last_indicator = $(this).closest('.field').find('.indicator');
+            BB_Settings.last_indicator.addClass('label label-primary').css('display', 'inline-block');
+
+            var val     = $(this).val();
+            var name    = $(this).attr('name');
+            var url     = BB_Settings.homeurl + "?p=" + BB_Settings.post_id + "&fl_builder";
+
+            console.log(val);
+            console.log(name);
+
+            $.post(
+                BB_Settings.ajaxurl,
+                {
+                    action:             "bb_pageSettings_update_post",
+                    update_post:        BB_Settings.post_id,
+                    update_name:        name,
+                    update_value:       val
+                },
+                on_update_success
+            );
+
             FLBuilder.showAjaxLoader();
 
             setTimeout(function () {
                 window.location.replace( url )
             }, 2000);
-
+        }else{
+            $(this).val( $('input[name=backup-permalink]').val() );
         }
+
     });
 
 
@@ -184,7 +211,11 @@
 
 
     function on_update_success(data) {
-        BB_Settings.last_indicator.text( BB_Settings.saved_text ).delay(1000).fadeOut();
+        if( 'success' == data )
+            BB_Settings.last_indicator.removeClass('label-primary').addClass('label-' + data).text( BB_Settings.saved_text ).delay(1000).fadeOut();
+        else
+            BB_Settings.last_indicator.removeClass('label-primary').addClass('label-' + data).text( BB_Settings.unsaved_text ).delay(1000).fadeOut();
+
         console.log(data);
     }
 

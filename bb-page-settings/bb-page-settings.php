@@ -17,11 +17,13 @@ class BB_Page_Settings {
             wp_enqueue_style( 'bb-page-settings',   plugins_url( '/bb-page-settings/css/bb-page-settings.css', dirname(__FILE__) ) );
 
             $data = array(
-                'button_text'   => __('Page settings', 'bb-toolbox'),
-                'saved_text'    => __('Saved!', 'bb-toolbox'),
-                'homeurl'       => home_url(),
-                'ajaxurl'       => admin_url('admin-ajax.php'),
-                'post_id'       => $post->ID
+                'button_text'       => __('Page settings', 'bb-toolbox'),
+                'saved_text'        => __('Saved!', 'bb-toolbox'),
+                'unsaved_text'      => __('Error', 'bb-toolbox'),
+                'permalink_text'    => __('Warning! Changing the permalink will impact your SEO or existing links inside other contents. Do you really want to do this?','bb-toolbox'),
+                'homeurl'           => home_url(),
+                'ajaxurl'           => admin_url('admin-ajax.php'),
+                'post_id'           => $post->ID
             );
             wp_localize_script( 'bb-page-settings', 'BB_Settings', $data );
         }
@@ -98,6 +100,7 @@ class BB_Page_Settings {
                                 </div>
                                 <div class="field">
                                     <div class="input-wrap">
+                                        <input type="hidden" name="backup-permalink" value="<?php echo esc_attr( $post->post_name ); ?>">
                                         <span class="input-prefix"><?php echo home_url(); ?>/</span><input name="post_name" class="inline-input" value="<?php echo esc_attr( $post->post_name ); ?>">
                                     </div>
                                     <label><?php _e('Permalink', 'bb-toolbox'); ?></label>
@@ -112,7 +115,7 @@ class BB_Page_Settings {
                                         'exclude_tree'     => $post->ID,
                                         'selected'         => $post->post_parent,
                                         'name'             => 'post_parent',
-                                        'show_option_none' => __('(no parent)'),
+                                        'show_option_none' => __('(no parent)', 'bb-toolbox'),
                                         'sort_column'      => 'menu_order, post_title',
                                         'echo'             => 0,
                                         'class'            => 'parent_id'
@@ -126,7 +129,7 @@ class BB_Page_Settings {
                                             <div class="input-wrap">
                                                 <?php echo $pages; ?>
                                             </div>
-                                            <label><?php _e( 'Parent' ); ?></label>
+                                            <label><?php _e( 'Parent', 'bb-toolbox' ); ?></label>
                                             <span class="indicator"><?php _e('Saving...', 'bb-toolbox'); ?></span>
                                         </div>
                                     <?php endif; // end empty pages check ?>
@@ -148,12 +151,13 @@ class BB_Page_Settings {
                                                 <?php page_template_dropdown( $template ) ?>
                                             </select>
                                         </div>
-                                        <label><?php _e( 'Template' ); ?></label>
+                                        <label><?php _e( 'Template', 'bb-toolbox' ); ?></label>
                                         <span class="indicator"><?php _e('Saving...', 'bb-toolbox'); ?></span>
                                     </div>
-                                    <?php
-                                endif;
-                                ?>
+                                <?php else: ?>
+                                        marche pas
+                                <?php endif; ?>
+
                                 <?php /* ?>
                                 <div class="field">
                                     <div class="input-wrap">
@@ -216,9 +220,9 @@ class BB_Page_Settings {
         $success = wp_update_post( $args );
 
         if ($success) {
-            $message = __('Saved!', 'bb-toolbox');
+            $message = 'success';
         } else {
-            $message = __('Nope', 'bb-toolbox');
+            $message = 'danger';
         }
 
         print $message;
@@ -234,9 +238,9 @@ class BB_Page_Settings {
         $success = update_post_meta( $post_id, $field, $value );
 
         if ($success) {
-            $message = __('Saved!', 'bb-toolbox');
+            $message = 'success';
         } else {
-            $message = __('Nope', 'bb-toolbox');
+            $message = 'danger';
         }
 
         print $message;

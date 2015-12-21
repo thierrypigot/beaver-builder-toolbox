@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Beaver Builde Google Maps Module\n"
-"POT-Creation-Date: 2015-12-17 11:12+0100\n"
-"PO-Revision-Date: 2015-12-17 11:13+0100\n"
+"Project-Id-Version: Beaver Builder Toolbox\n"
+"POT-Creation-Date: 2015-12-21 13:24+0100\n"
+"PO-Revision-Date: 2015-12-21 13:24+0100\n"
 "Last-Translator: Thierry Pigot <contact@thierry-pigot.fr>\n"
 "Language-Team: Thierry Pigot <contact@thierry-pigot.fr>\n"
 "Language: fr_FR\n"
@@ -13,7 +13,7 @@ msgstr ""
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-KeywordsList: __;_e;esc_attr_e\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: bb-page-settings/bb-page-settings.php:20
@@ -21,68 +21,80 @@ msgid "Page settings"
 msgstr "Attributs de la page"
 
 #: bb-page-settings/bb-page-settings.php:21
-#: bb-page-settings/bb-page-settings.php:219
-#: bb-page-settings/bb-page-settings.php:237
 msgid "Saved!"
 msgstr "Enregistré !"
 
-#: bb-page-settings/bb-page-settings.php:85
+#: bb-page-settings/bb-page-settings.php:22
+msgid "Error"
+msgstr "Erreur"
+
+#: bb-page-settings/bb-page-settings.php:23
+msgid ""
+"Warning! Changing the permalink will impact your SEO or existing links "
+"inside other contents. Do you really want to do this?"
+msgstr ""
+"Attention ! Changer le permalien aura un impact sur votre référencement ou "
+"sur les liens existants à l'intérieur d'autres contenus. Voulez-vous "
+"vraiment le faire ?"
+
+#: bb-page-settings/bb-page-settings.php:87
 msgid "Page Details"
 msgstr "Détails de la page"
 
-#: bb-page-settings/bb-page-settings.php:86
+#: bb-page-settings/bb-page-settings.php:88
 msgid "SEO"
 msgstr "SEO"
 
-#: bb-page-settings/bb-page-settings.php:96
+#: bb-page-settings/bb-page-settings.php:98
 msgid "Title"
 msgstr "Titre"
 
-#: bb-page-settings/bb-page-settings.php:97
-#: bb-page-settings/bb-page-settings.php:104
-#: bb-page-settings/bb-page-settings.php:130
-#: bb-page-settings/bb-page-settings.php:152
-#: bb-page-settings/bb-page-settings.php:182
-#: bb-page-settings/bb-page-settings.php:189
+#: bb-page-settings/bb-page-settings.php:99
+#: bb-page-settings/bb-page-settings.php:107
+#: bb-page-settings/bb-page-settings.php:133
+#: bb-page-settings/bb-page-settings.php:155
+#: bb-page-settings/bb-page-settings.php:186
+#: bb-page-settings/bb-page-settings.php:193
 msgid "Saving..."
 msgstr "Enregistrement"
 
-#: bb-page-settings/bb-page-settings.php:103
+#: bb-page-settings/bb-page-settings.php:106
 msgid "Permalink"
 msgstr "Permalien"
 
-#: bb-page-settings/bb-page-settings.php:115
+#: bb-page-settings/bb-page-settings.php:118
 msgid "(no parent)"
-msgstr "(Aucun parent)"
+msgstr "(pas de parent)"
 
-#: bb-page-settings/bb-page-settings.php:129
+#: bb-page-settings/bb-page-settings.php:132
 msgid "Parent"
 msgstr "Parent"
 
-#: bb-page-settings/bb-page-settings.php:145
+#: bb-page-settings/bb-page-settings.php:148
 msgid "Default Template"
 msgstr "Modèle par défaut"
 
-#: bb-page-settings/bb-page-settings.php:151
+#: bb-page-settings/bb-page-settings.php:154
 msgid "Template"
 msgstr "Modèle"
 
-#: bb-page-settings/bb-page-settings.php:181
+#: bb-page-settings/bb-page-settings.php:185
 msgid "Meta title"
 msgstr "Méta titre"
 
-#: bb-page-settings/bb-page-settings.php:188
+#: bb-page-settings/bb-page-settings.php:192
 msgid "Meta description"
 msgstr "Méta description"
 
-#: bb-page-settings/bb-page-settings.php:192
+#: bb-page-settings/bb-page-settings.php:196
 msgid "No SEO plugin detected :("
 msgstr "Pas de plugin SEO détecté :("
 
-#: bb-page-settings/bb-page-settings.php:221
-#: bb-page-settings/bb-page-settings.php:239
-msgid "Nope"
-msgstr "Rien"
+#~ msgid "Totot"
+#~ msgstr "titi"
+
+#~ msgid "Nope"
+#~ msgstr "Rien"
 
 #~ msgid "No SEO plugin detected"
 #~ msgstr "Pas de plugin SEO détecté"

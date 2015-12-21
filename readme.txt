@@ -16,9 +16,7 @@ Add a settings panel in Beaver Builder to manage page data.
 Settings
 1. Page title
 2. Page permalink
-3. Parent page
-4. Template page
-5. SEO title + SEO description (WordPress SEO, All in one SEO, HeadSpace2 SEO, Platinum SEO Pack or Genesis)
+3. SEO title + SEO description (WordPress SEO, All in one SEO, HeadSpace2 SEO, Platinum SEO Pack or Genesis)
 
 
 == Installation ==
@@ -30,6 +28,10 @@ Settings
 == Screenshots ==
 
 == Changelog ==
+
+= 1.2 =
+* Add confirmation on permalink change
+* Add bootstrap label style on ajax responses
 
 = 1.1 =
 * Add parent page and template page selector

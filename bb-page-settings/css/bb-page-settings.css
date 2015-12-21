@@ -83,7 +83,8 @@
 }
 .fl-pageSettings-panel-content .field label {
     padding: 3px 8px;
-    background: #eee;
+    background: #E2E2E2;
+    color: #353535;
     font-size: 12px;
     font-weight: normal;
     margin: 0;
