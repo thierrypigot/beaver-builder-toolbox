@@ -23,6 +23,10 @@ function tp_bb_load_textdomain_toolbox()
     load_plugin_textdomain( 'bb-toolbox', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 }
 
+add_filter( 'fl_builder_upgrade_url', 'tp_bb_toolbox_upgrade_link' );
+function tp_bb_toolbox_upgrade_link() { 
+    return 'https://www.wpbeaverbuilder.com/?fla=315'; 
+}
 
 /*
  * Load Toolbox modules
