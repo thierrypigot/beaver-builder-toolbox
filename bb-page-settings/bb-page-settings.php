@@ -154,8 +154,6 @@ class BB_Page_Settings {
                                         <label><?php _e( 'Template', 'bb-toolbox' ); ?></label>
                                         <span class="indicator"><?php _e('Saving...', 'bb-toolbox'); ?></span>
                                     </div>
-                                <?php else: ?>
-                                        marche pas
                                 <?php endif; ?>
 
                                 <?php /* ?>
