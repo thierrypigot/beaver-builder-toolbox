@@ -2,8 +2,8 @@
 Contributors: thierrypigot
 Donate link: https://www.thierry-pigot.fr/reglement/
 Tags: builder, page builder, visual composer, toolbox
-Requires at least: 3.6
-Tested up to: 4.4
+Requires at least: 4.2
+Tested up to: 4.5.2
 Stable tag: trunk
 License: GPL2+
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -12,11 +12,14 @@ Add a settings panel in Beaver Builder to manage page data.
 
 
 == Description ==
+Source : https://github.com/brentjett/bb-experiments
 
 Settings
 1. Page title
 2. Page permalink
-3. SEO title + SEO description (WordPress SEO, All in one SEO, HeadSpace2 SEO, Platinum SEO Pack or Genesis)
+2. Page parent
+2. Page template
+3. SEO title + SEO description (WordPress SEO, All in one SEO, HeadSpace2 SEO, Platinum SEO Pack, SEO Framework or Genesis)
 
 
 == Installation ==
@@ -28,6 +31,10 @@ Settings
 == Screenshots ==
 
 == Changelog ==
+
+= 1.3 =
+* Add SEO Framework
+* debug css style
 
 = 1.2 =
 * Add confirmation on permalink change

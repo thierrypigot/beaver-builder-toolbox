@@ -99,6 +99,10 @@
     margin: 0;
     vertical-align: top;
 }
+.label-success,
+.label-error {
+	color: #fff;
+}
 .fl-pageSettings-panel-content .field .input-wrap {
     border-bottom: 1px solid #E2E2E2;
     padding:14px 20px;

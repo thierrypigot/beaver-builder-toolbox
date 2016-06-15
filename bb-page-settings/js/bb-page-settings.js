@@ -40,7 +40,7 @@
     /** Change Title **/
     $('input[name=post_title]').on('change', function() {
         BB_Settings.last_indicator = $(this).closest('.field').find('.indicator');
-        BB_Settings.last_indicator.addClass('label label-primary').css('display', 'inline-block');
+        BB_Settings.last_indicator.html( BB_Settings.label_text ).addClass('label label-primary').css('display', 'inline-block');
 
         var val     = $(this).val();
         var name    = $(this).attr('name');
@@ -59,7 +59,7 @@
             on_update_success
         );
 
-    });
+	});
 
     /** Change Permalink **/
     $('input[name=post_name]').on('change', function() {
@@ -91,6 +91,7 @@
             setTimeout(function () {
                 window.location.replace( url )
             }, 2000);
+
         }else{
             $(this).val( $('input[name=backup-permalink]').val() );
         }
@@ -101,7 +102,7 @@
 
     $('select[name=post_parent]').on('change', function() {
         BB_Settings.last_indicator = $(this).closest('.field').find('.indicator');
-        BB_Settings.last_indicator.css('display', 'inline-block');
+        BB_Settings.last_indicator.addClass('label label-primary').css('display', 'inline-block');
 
         var val     = $(this).val();
         var name    = $(this).attr('name');
@@ -132,7 +133,7 @@
 
     $('select[name=page_template]').on('change', function() {
         BB_Settings.last_indicator = $(this).closest('.field').find('.indicator');
-        BB_Settings.last_indicator.css('display', 'inline-block');
+        BB_Settings.last_indicator.addClass('label label-primary').css('display', 'inline-block');
 
         var val     = $(this).val();
         var field   = $(this).attr('data-field');
@@ -157,14 +158,14 @@
         setTimeout(function () {
             window.location.replace( url )
         }, 2000);
-
+		
     });
 
 
 
     $('input[name=meta_title], input[name=meta_description]').on('change', function() {
         BB_Settings.last_indicator = $(this).closest('.field').find('.indicator');
-        BB_Settings.last_indicator.css('display', 'inline-block');
+		BB_Settings.last_indicator.addClass('label label-primary').css('display', 'inline-block');
 
         var val     = $(this).val();
         var field   = $(this).attr('data-field');
@@ -182,7 +183,8 @@
             },
             on_update_success
         );
-    });
+
+	});
 
 
     $('.count').keyup(function(){
@@ -211,12 +213,19 @@
 
 
     function on_update_success(data) {
-        if( 'success' == data )
-            BB_Settings.last_indicator.removeClass('label-primary').addClass('label-' + data).text( BB_Settings.saved_text ).delay(1000).fadeOut();
-        else
-            BB_Settings.last_indicator.removeClass('label-primary').addClass('label-' + data).text( BB_Settings.unsaved_text ).delay(1000).fadeOut();
+				
+		if( 'success' == data ) {
+            BB_Settings.last_indicator.html( BB_Settings.saved_text ).removeClass().addClass('indicator label label-' + data).delay(1000).fadeOut(function(){
+				$(this).empty().removeClass().addClass('indicator');
+			});
+		}
+        else{
+			BB_Settings.last_indicator.html( BB_Settings.unsaved_text ).removeClass().addClass('indicator label label-' + data).delay(1000).fadeOut(function(){
+				$(this).empty().removeClass().addClass('indicator');
+			});
+		}
+		
 
-        console.log(data);
     }
 
 })(jQuery);

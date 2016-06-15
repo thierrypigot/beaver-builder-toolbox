@@ -18,6 +18,7 @@ class BB_Page_Settings {
 
             $data = array(
                 'button_text'       => __('Page settings', 'bb-toolbox'),
+                'label_text'        => __('Saving...', 'bb-toolbox'),
                 'saved_text'        => __('Saved!', 'bb-toolbox'),
                 'unsaved_text'      => __('Error', 'bb-toolbox'),
                 'permalink_text'    => __('Warning! Changing the permalink will impact your SEO or existing links inside other contents. Do you really want to do this?','bb-toolbox'),
@@ -69,9 +70,9 @@ class BB_Page_Settings {
                     $meta_title_field       = 'title';
                     $meta_description_field = 'description';
                 }
-                else if( $this->detect_plugin( array( 'functions' => array('genesis_constants') ) ) )
+                else if( $this->detect_plugin( array( 'functions' => array('genesis_constants') ) ) || $this->detect_plugin( array( 'classes' => array('The_SEO_Framework_Load') ) ) )
                 {
-                    //  Genesis
+                    //  Genesis + SEO Framework
                     $meta_title_field       = '_genesis_title';
                     $meta_description_field = '_genesis_description';
                 }
@@ -96,7 +97,7 @@ class BB_Page_Settings {
                                         <input name="post_title" value="<?php echo esc_attr( $post->post_title ); ?>">
                                     </div>
                                     <label><?php _e('Title', 'bb-toolbox'); ?></label>
-                                    <span class="indicator"><?php _e('Saving...', 'bb-toolbox'); ?></span>
+                                    <span class="indicator"></span>
                                 </div>
                                 <div class="field">
                                     <div class="input-wrap">
@@ -130,7 +131,7 @@ class BB_Page_Settings {
                                                 <?php echo $pages; ?>
                                             </div>
                                             <label><?php _e( 'Parent', 'bb-toolbox' ); ?></label>
-                                            <span class="indicator"><?php _e('Saving...', 'bb-toolbox'); ?></span>
+                                            <span class="indicator"></span>
                                         </div>
                                     <?php endif; // end empty pages check ?>
                                 <?php endif; // end hierarchical check. ?>
