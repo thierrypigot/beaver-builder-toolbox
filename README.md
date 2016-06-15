@@ -1,12 +1,4 @@
 # Beaver Builder Toolbox
-Contributors: thierrypigot
-Donate link: https://www.thierry-pigot.fr/reglement/
-Tags: builder, page builder, visual composer, toolbox
-Requires at least: 4.2
-Tested up to: 4.5.2
-Stable tag: trunk
-License: GPL2+
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Add a settings panel in Beaver Builder to manage page data.
 
