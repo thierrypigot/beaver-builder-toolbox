@@ -15,6 +15,7 @@ Add a settings panel in Beaver Builder to manage page data.
 Source : https://github.com/brentjett/bb-experiments
 
 Settings
+
 1. Page title
 2. Page permalink
 2. Page parent
