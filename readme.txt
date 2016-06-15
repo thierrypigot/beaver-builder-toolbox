@@ -32,6 +32,9 @@ Settings
 
 == Changelog ==
 
+= 1.4 =
+* Add WordPress updater
+
 = 1.3 =
 * Add SEO Framework
 * debug css style
