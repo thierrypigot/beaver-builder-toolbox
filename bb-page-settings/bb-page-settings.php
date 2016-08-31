@@ -198,8 +198,8 @@ class BB_Page_Settings {
                         </div>
                     </form>
 
-                </form>
-            </form>
+                </div>
+            </div>
             <?php
         }
     }
